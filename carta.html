@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Aniversario, Carla</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Poppins:wght@300;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #ffeef2;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 500px;
+            height: 550px;
+        }
+
+        /* --- SNOOPY ART --- */
+        .snoopy-art {
+            width: 150px;
+            height: 130px;
+            position: relative;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Casita de Snoopy (Simplificada en CSS plano) */
+        .roof {
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 40px solid #e74c3c;
+            position: absolute;
+            bottom: 30px;
+            left: 15px;
+        }
+        .house-body {
+            width: 100px;
+            height: 40px;
+            background-color: #e74c3c;
+            position: absolute;
+            bottom: 0;
+            left: 25px;
+        }
+
+        /* Snoopy acostado */
+        .snoopy-body {
+            width: 70px;
+            height: 25px;
+            background: white;
+            border: 3px solid #000;
+            border-radius: 20px;
+            position: absolute;
+            bottom: 40px;
+            left: 35px;
+        }
+        .snoopy-head {
+            width: 35px;
+            height: 25px;
+            background: white;
+            border: 3px solid #000;
+            border-radius: 50% 40% 40% 40%;
+            position: absolute;
+            bottom: 48px;
+            left: 70px;
+        }
+        .snoopy-ear {
+            width: 15px;
+            height: 22px;
+            background: #000;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            transform: rotate(10deg);
+        }
+        .snoopy-nose {
+            width: 7px;
+            height: 7px;
+            background: #000;
+            border-radius: 50%;
+            position: absolute;
+            top: 8px;
+            right: -4px;
+        }
+        .woodstock {
+            width: 12px;
+            height: 12px;
+            background: #f1c40f;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 67px;
+            left: 60px;
+            animation: bounce 0.5s ease-in-out infinite alternate;
+        }
+
+        /* --- SOBRE INTERACTIVO --- */
+        .envelope-wrapper {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 250px;
+            background: #f39c12;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border-radius: 0 0 10px 10px;
+        }
+
+        /* Tapa del sobre */
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 130px solid #d35400;
+            transform-origin: top;
+            transition: transform 0.4s ease;
+            z-index: 4;
+        }
+
+        /* Laterales del sobre */
+        .envelope::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0px;
+            border-left: 150px solid #e67e22;
+            border-right: 150px solid #e67e22;
+            border-top: 120px solid transparent;
+            border-bottom: 130px solid #e67e22;
+            border-radius: 0 0 10px 10px;
+            z-index: 3;
+        }
+
+        /* Corazón para abrir */
+        .heart-btn {
+            position: absolute;
+            top: 110px;
+            left: 135px;
+            width: 30px;
+            height: 30px;
+            background: #e74c3c;
+            transform: rotate(45deg);
+            z-index: 5;
+            transition: transform 0.4s ease, opacity 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .heart-btn::before, .heart-btn::after {
+            content: '';
+            width: 30px;
+            height: 30px;
+            background: #e74c3c;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .heart-btn::before { top: -15px; left: 0; }
+        .heart-btn::after { left: -15px; top: 0; }
+
+        /* --- LA CARTA --- */
+        .letter {
+            position: absolute;
+            bottom: 10px;
+            left: 15px;
+            width: 270px;
+            height: 220px;
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transition: transform 0.6s ease, cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .letter h1 {
+            font-family: 'Caveat', cursive;
+            color: #e74c3c;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .letter p {
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        /* --- ANIMACIONES Y ESTADOS ACTIVOS --- */
+        .envelope-wrapper.open .envelope::before {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        .envelope-wrapper.open .letter {
+            transform: translateY(-130px) scale(1.05);
+            height: 280px; /* Se agranda al salir */
+            z-index: 4;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .envelope-wrapper.open .heart-btn {
+            transform: rotate(45deg) scale(0);
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
+        }
+
+        .instruction {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Snoopy Art -->
+        <div class="snoopy-art">
+            <div class="woodstock"></div>
+            <div class="roof"></div>
+            <div class="house-body"></div>
+            <div class="snoopy-body"></div>
+            <div class="snoopy-head">
+                <div class="snoopy-ear"></div>
+                <div class="snoopy-nose"></div>
+            </div>
+        </div>
+
+        <!-- Sobre e interactividad -->
+        <div class="envelope-wrapper" onclick="toggleEnvelope()">
+            <div class="heart-btn"></div>
+            <div class="envelope"></div>
+            
+            <!-- La carta interior -->
+            <div class="letter">
+                <h1>¡Feliz Aniversario, Carla!</h1>
+                <p>
+                    Hoy celebramos otro mes juntos. Gracias por cada sonrisa, por tu apoyo y por hacer que cada día sea más especial. Eres mi persona y mi gatito tuxedo favorito en el mundo entero. 
+                </p>
+                <p style="font-family: 'Caveat', cursive; font-size: 1.5rem; color: #e74c3c; margin-top: 10px;">
+                    Te amo muchísimo ❤️
+                </p>
+            </div>
+        </div>
+
+        <div class="instruction">Haz clic en el corazón para abrir 💌</div>
+    </div>
+
+    <script>
+        function toggleEnvelope() {
+            document.querySelector('.envelope-wrapper').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
